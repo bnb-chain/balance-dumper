@@ -1,4 +1,4 @@
-package reporter
+package utils
 
 import (
 	"encoding/csv"
@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-func csvExport(header []string,data [][]string,path string,name string) error {
+func CsvExport(header []string,data [][]string,path string,name string) error {
 	file, err := os.Create(filepath.Join(path,name))
 	if err != nil {
 		return err
