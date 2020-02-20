@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/binance-chain/acc-tool/reporter"
+	"github.com/binance-chain/acc-tool/dumper"
+	"github.com/binance-chain/acc-tool/node"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"log"
@@ -19,18 +20,18 @@ type Executor struct {
 
 func main(){
 	rootCmd := &cobra.Command{
-		Use:               "bnbaccr",
-		Short:             "BNB Account Reports",
+		Use:               "bdumper",
+		Short:             "Balance Dumper",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return reporter.AccExport()
+			return dumper.AccExport()
 		},
 		PersistentPreRunE: globalConfig,
 	}
 
-	rootCmd.PersistentFlags().String("home", os.ExpandEnv("$HOME/.bnbaccr"), "directory for config and data")
+	rootCmd.PersistentFlags().String("home", os.ExpandEnv("$HOME/.bdumper"), "directory for config and data")
 	rootCmd.PersistentFlags().Int64("height",0,"query height ")
 	rootCmd.PersistentFlags().String("asset","","query asset ")
-	rootCmd.PersistentFlags().StringP("output","o",os.ExpandEnv("$HOME/.bnbaccr"),"directory for storing the csv file of report result")
+	rootCmd.PersistentFlags().StringP("output","o",os.ExpandEnv("$HOME/.bdumper"),"directory for storing the csv file of balance result")
 
 	executor := Executor{rootCmd, os.Exit}
 	err := executor.Execute()
@@ -62,11 +63,18 @@ func globalConfig(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	logf,err := os.OpenFile(filepath.Join(homeDir,reporter.LogName),os.O_WRONLY|os.O_CREATE|os.O_APPEND,0644);if err != nil {
+	path := viper.GetString("output")
+	if _,err := os.Stat(path); err != nil && os.IsNotExist(err) {
+		err = os.Mkdir(path,node.DefaultDirPerm)
+		if err != nil {
+			return err
+		}
+	}
+	logf,err := os.OpenFile(filepath.Join(homeDir, dumper.LogName),os.O_WRONLY|os.O_CREATE|os.O_APPEND,0644);if err != nil {
 		return err
 	}
 	log.SetOutput(logf)
-	log.SetPrefix("[Reporter]")
+	log.SetPrefix("[Dumper]")
 	return nil
 }
 

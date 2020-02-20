@@ -1,4 +1,4 @@
-package reporter
+package dumper
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ import (
 )
 
 const NoData = "failed to get rootMultiStore: no data"
-const LogName  = "reporter.log"
+const LogName  = "dumper.log"
 
 func AccExport() (err error){
 
@@ -110,7 +110,7 @@ func export(accs []account.Balance) {
 			row := []string{acc.Address,acc.Asset,strconv.FormatInt(acc.Quantity,10)}
 			data[index] = row
 		}
-		err := csvExport(header,data,viper.GetString("output"),viper.GetString("asset") + "_" + viper.GetString("height") + ".csv")
+		err := utils.CsvExport(header,data,viper.GetString("output"),viper.GetString("asset") + "_" + viper.GetString("height") + ".csv")
 		if err != nil {
 			panic(err)
 		}
