@@ -63,9 +63,8 @@ func globalConfig(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	path := viper.GetString("output")
-	if _,err := os.Stat(path); err != nil && os.IsNotExist(err) {
-		err = os.Mkdir(path,node.DefaultDirPerm)
+	if _,err := os.Stat(homeDir); err != nil && os.IsNotExist(err) {
+		err = os.Mkdir(homeDir,node.DefaultDirPerm)
 		if err != nil {
 			return err
 		}
