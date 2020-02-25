@@ -8,10 +8,10 @@ import (
 )
 
 func TestAccExport(t *testing.T) {
-	viper.Set("home",os.ExpandEnv("$HOME/.bnbaccr"))
-	viper.Set("height",68515742)
+	viper.Set("home",os.ExpandEnv("$HOME/.bdumper"))
+	viper.Set("height",1000)
 	viper.Set("asset","HYN-F21")
-	viper.Set("output",os.ExpandEnv("$HOME/.bnbaccr"))
+	viper.Set("output",os.ExpandEnv("$HOME/.bdumper"))
 	err := AccExport()
 	if err != nil {
 		t.Error(err)
@@ -19,7 +19,11 @@ func TestAccExport(t *testing.T) {
 }
 
 func TestLatestBreatheHeight(t *testing.T){
-	targetHeight := int64(68515745)
-	rs := latestBreatheBlockHeight(targetHeight)
-	fmt.Printf("result : %d\n",rs)
+	targetHeight := int64(60909538)
+	breatheBlockHeight,err := LatestBreatheBlockHeight(targetHeight)
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Printf("query count = %d\n",QC)
+	fmt.Printf("result : %d\n",breatheBlockHeight)
 }

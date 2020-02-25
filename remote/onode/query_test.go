@@ -13,3 +13,11 @@ func TestGetTokenInfo(t *testing.T) {
 	bz, err := json.Marshal(token)
 	fmt.Println(string(bz))
 }
+
+func TestGetBlock(t *testing.T) {
+	height := int64(70337812)
+	block,err := GetBlock(&height)
+	assert.NoError(t,err)
+	bk,err := json.Marshal(block)
+	fmt.Println(string(bk))
+}
