@@ -46,7 +46,7 @@ The progress can be checked in the logfile named `bdumper.log` under users `home
 
 ## Strategy
 
-User can use this tool to perform multiple query statistics. The node data is stored in the user-specified home directory. Of course, the full node does not have to launched every time and this tool is always trying to find a most efficient way to get the snapshot of a particular height. The following shows how does this tool work in different situations.
+User can use this tool to perform multiple query statistics. The node data is stored in the user-specified home directory. Technically, the full node does not have to launched every time and this tool is always trying to find a most efficient way to get the snapshot of a particular height. The following shows how does this tool work in different situations.
 
 Assuming that `queryH` as the height user want to query,`breatheH` as the breathe block height of the day of `queryH`,`latestH` as the latest height in DB of user's local environment.
 
