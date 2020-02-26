@@ -2,7 +2,7 @@ package explorer
 
 import (
 	"encoding/json"
-	"github.com/binance-chain/acc-tool/remote"
+	"github.com/binance-chain/balance-dumper/remote"
 	"strconv"
 )
 
