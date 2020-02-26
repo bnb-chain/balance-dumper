@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/binance-chain/acc-tool/dumper"
-	"github.com/binance-chain/acc-tool/node"
+	"github.com/binance-chain/balance-dumper/dumper"
+	"github.com/binance-chain/balance-dumper/node"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"log"

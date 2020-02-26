@@ -2,11 +2,11 @@ package dumper
 
 import (
 	"fmt"
-	"github.com/binance-chain/acc-tool/data/account"
-	"github.com/binance-chain/acc-tool/node"
-	"github.com/binance-chain/acc-tool/remote/explorer"
-	"github.com/binance-chain/acc-tool/remote/onode"
-	"github.com/binance-chain/acc-tool/utils"
+	"github.com/binance-chain/balance-dumper/data/account"
+	"github.com/binance-chain/balance-dumper/node"
+	"github.com/binance-chain/balance-dumper/remote/explorer"
+	"github.com/binance-chain/balance-dumper/remote/onode"
+	"github.com/binance-chain/balance-dumper/utils"
 	"github.com/spf13/viper"
 	"log"
 	"math"
