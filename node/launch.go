@@ -1,6 +1,7 @@
 package node
 
 import (
+	"fmt"
 	"github.com/binance-chain/node/app"
 	"github.com/binance-chain/node/common/tx"
 	"github.com/binance-chain/node/common/types"
@@ -30,7 +31,6 @@ import (
 
 var Codec = MakeCodec()
 
-
 // MakeCodec creates a custom tx codec.
 func MakeCodec() *wire.Codec {
 	var cdc = wire.NewCodec()
@@ -49,11 +49,9 @@ func MakeCodec() *wire.Codec {
 	return cdc
 }
 
-
-
 type XBinanceChain struct {
 	*app.BinanceChain
-	stopAt int64
+	stopAt     int64
 	stopSignal chan bool
 }
 
@@ -65,15 +63,14 @@ func (app *XBinanceChain) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlo
 	return
 }
 
-func newBinanceChain(logger tlog.Logger, db dbm.DB, storeTracer io.Writer,stopAt int64) *XBinanceChain {
+func newBinanceChain(logger tlog.Logger, db dbm.DB, storeTracer io.Writer, stopAt int64) *XBinanceChain {
 
 	bc := app.NewBinanceChain(logger, db, storeTracer)
-	xc := &XBinanceChain{bc,stopAt,make(chan bool)}
+	xc := &XBinanceChain{bc, stopAt, make(chan bool)}
 	bc.SetBeginBlocker(xc.BeginBlocker)
 
 	return xc
 }
-
 
 func Start(stopAt int64) (err error) {
 
@@ -84,7 +81,8 @@ func Start(stopAt int64) (err error) {
 		return err
 	}
 
-	log.Printf("===>start node,home = %s, stopAt = %d, StateSyncHeight = %d\n",ctx.Config.RootDir,stopAt,ctx.Config.StateSyncHeight)
+	log.Printf("===>start node,home = %s, stopAt = %d, StateSyncHeight = %d\n", ctx.Config.RootDir, stopAt, ctx.Config.StateSyncHeight)
+	fmt.Printf("===>start node,home = %s, stopAt = %d, StateSyncHeight = %d\n", ctx.Config.RootDir, stopAt, ctx.Config.StateSyncHeight)
 
 	cfg := ctx.Config
 
@@ -94,7 +92,7 @@ func Start(stopAt int64) (err error) {
 		return err
 	}
 
-	bncApp := newBinanceChain(ctx.Logger,db,nil,stopAt)
+	bncApp := newBinanceChain(ctx.Logger, db, nil, stopAt)
 
 	nodeKey, err := p2p.LoadOrGenNodeKey(cfg.NodeKeyFile())
 	if err != nil {
@@ -104,13 +102,12 @@ func Start(stopAt int64) (err error) {
 	cliCreator := concurrent.NewAsyncLocalClientCreator(bncApp,
 		ctx.Logger.With("module", "abciCli"))
 
-
-	genesisDocProvider := func() (*tmTypes.GenesisDoc, error){
-		genesisDoc,err := tmTypes.GenesisDocFromJSON([]byte(GenesisJson))
+	genesisDocProvider := func() (*tmTypes.GenesisDoc, error) {
+		genesisDoc, err := tmTypes.GenesisDocFromJSON([]byte(GenesisJson))
 		if err != nil {
-			return nil,err
+			return nil, err
 		}
-		return genesisDoc,nil
+		return genesisDoc, nil
 	}
 
 	// create & start tendermint node
@@ -135,8 +132,10 @@ func Start(stopAt int64) (err error) {
 		return err
 	}
 
-	log.Printf("===>node started from height = %d\n",tmNode.BlockStore().Height())
+	log.Printf("===>node started from height = %d\n", tmNode.BlockStore().Height())
 	log.Println("===>syncing......")
+	fmt.Printf("===>node started from height = %d\n", tmNode.BlockStore().Height())
+	fmt.Println("===>syncing......")
 
 	server.TrapSignal(func() {
 		if tmNode.IsRunning() {
@@ -144,27 +143,20 @@ func Start(stopAt int64) (err error) {
 		}
 	})
 
-
 	select {
-		case <- bncApp.stopSignal:
-			log.Printf("===>node catches up the target height %d, terminal the node\n", stopAt)
-			if tmNode.IsRunning() {
-				err = tmNode.Stop()
-				close(bncApp.stopSignal)
-				if err != nil {
-					return err
-				}
-				time.Sleep(1 * time.Second)
-				db.Close()
+	case <-bncApp.stopSignal:
+		log.Printf("===>node catches up the target height %d, terminal the node\n", stopAt)
+		fmt.Printf("===>node catches up the target height %d, terminal the node\n", stopAt)
+		if tmNode.IsRunning() {
+			err = tmNode.Stop()
+			close(bncApp.stopSignal)
+			if err != nil {
+				return err
 			}
+			time.Sleep(1 * time.Second)
+			db.Close()
+		}
 	}
 
 	return nil
 }
-
-
-
-
-
-
-

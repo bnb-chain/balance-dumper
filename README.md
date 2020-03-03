@@ -26,7 +26,7 @@ $ bdumper -h
 Balance Dumper
 
 Usage:
-  bnbaccr [flags]
+  bdumper [flags]
 
 Flags:
       --asset string    query asset 

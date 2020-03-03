@@ -43,6 +43,7 @@ func main() {
 	airdropCmd.AddCommand(multisend.Command())
 
 	airdropCmd.PersistentFlags().StringP(common.FlagHome, "", DefaultCLIHome, "directory for config and data")
+	airdropCmd.PersistentFlags().StringP(common.FlagOutput, "o", "text", "Output format (text|json)")
 
 	airdropCmd.PersistentPreRunE = func(cmd *cobra.Command, args []string) error {
 		if err := viper.BindPFlags(cmd.Flags()); err != nil {
