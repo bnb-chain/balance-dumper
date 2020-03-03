@@ -1,11 +1,14 @@
 package utils
 
 import (
+	"encoding/csv"
+	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
-func RemoveAllExcept(dir string,exceptName string) error{
+func RemoveAllExcept(dir string, exceptName string) error {
 	d, err := os.Open(dir)
 	if err != nil {
 		return err
@@ -27,5 +30,18 @@ func RemoveAllExcept(dir string,exceptName string) error{
 }
 
 func RemoveContents(dir string) error {
-	return RemoveAllExcept(dir,"")
+	return RemoveAllExcept(dir, "")
+}
+
+func ReadCSV(fileName string) (records [][]string, err error) {
+
+	bts, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		return
+	}
+
+	reader := csv.NewReader(strings.NewReader(string(bts)))
+	records, err = reader.ReadAll()
+
+	return
 }
