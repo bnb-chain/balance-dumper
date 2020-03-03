@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/binance-chain/balance-dumper/common"
 	"github.com/binance-chain/balance-dumper/dumper"
 	"github.com/binance-chain/balance-dumper/node"
 	"github.com/spf13/cobra"
@@ -11,17 +12,10 @@ import (
 	"path/filepath"
 )
 
-// Executor wraps the cobra Command with a nicer Execute method
-type Executor struct {
-	*cobra.Command
-	Exit func(int) // this is os.Exit by default, override in tests
-}
-
-
-func main(){
+func main() {
 	rootCmd := &cobra.Command{
-		Use:               "bdumper",
-		Short:             "Balance Dumper",
+		Use:   "bdumper",
+		Short: "Balance Dumper",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return dumper.AccExport()
 		},
@@ -29,11 +23,11 @@ func main(){
 	}
 
 	rootCmd.PersistentFlags().String("home", os.ExpandEnv("$HOME/.bdumper"), "directory for config and data")
-	rootCmd.PersistentFlags().Int64("height",0,"query height ")
-	rootCmd.PersistentFlags().String("asset","","query asset ")
-	rootCmd.PersistentFlags().StringP("output","o",os.ExpandEnv("$HOME/.bdumper"),"directory for storing the csv file of balance result")
+	rootCmd.PersistentFlags().Int64("height", 0, "query height ")
+	rootCmd.PersistentFlags().String("asset", "", "query asset ")
+	rootCmd.PersistentFlags().StringP("output", "o", os.ExpandEnv("$HOME/.bdumper"), "directory for storing the csv file of balance result")
 
-	executor := Executor{rootCmd, os.Exit}
+	executor := common.Executor{rootCmd, os.Exit}
 	err := executor.Execute()
 	if err != nil {
 		fmt.Println(err)
@@ -63,17 +57,17 @@ func globalConfig(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	if _,err := os.Stat(homeDir); err != nil && os.IsNotExist(err) {
-		err = os.Mkdir(homeDir,node.DefaultDirPerm)
+	if _, err := os.Stat(homeDir); err != nil && os.IsNotExist(err) {
+		err = os.Mkdir(homeDir, node.DefaultDirPerm)
 		if err != nil {
 			return err
 		}
 	}
-	logf,err := os.OpenFile(filepath.Join(homeDir, dumper.LogName),os.O_WRONLY|os.O_CREATE|os.O_APPEND,0644);if err != nil {
+	logf, err := os.OpenFile(filepath.Join(homeDir, dumper.LogName), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	if err != nil {
 		return err
 	}
 	log.SetOutput(logf)
 	log.SetPrefix("[Dumper]")
 	return nil
 }
-
