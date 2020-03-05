@@ -3,13 +3,15 @@ Binance Airdrop
 Binance Airdrop is a tool designed to provide users with the simplest way to distribute tokens to multiple accounts.
 
 ### Usage
-Note that we have two binary file to distinct testNet or production network. `bairdrop` used to production while `tbairdrop` is for testNet. Fist, place the binary file in the specified folder, enter this folder, and execute it to check the usage of it
+Note that we have two binary files to distinguish testNet or production network. `bairdrop` is used for production and `tbairdrop` for testNet. 
+
+Now, let us do a demo with `tbairdrop`. First of all, place the binary file in the specified folder, enter this folder, and execute it to check the usage of it
 ```
-$ bairdrop
-BlockChain Airdrop
+$ tbairdrop
+Testnet BlockChain Airdrop
 
 Usage:
-  bairdrop [command]
+  tbairdrop [command]
 
 Available Commands:
   keys        Add or view local private keys
@@ -18,10 +20,10 @@ Available Commands:
 
 Flags:
   -h, --help            help for bairdrop
-      --home string     directory for config and data (default "/Users/fletcher/.bairdrop")
+      --home string     directory for config and data (default "/Users/fletcher/.tbairdrop")
   -o, --output string   Output format (text|json) (default "text")
 
-Use "bairdrop [command] --help" for more information about a command.
+Use "tbairdrop [command] --help" for more information about a command.
 ```
 You can specify a home directory for this operation by `--home`. Otherwise, `${HOME}/.bairdrop` will serve as the default `home`.
 ### keys
@@ -30,9 +32,9 @@ Before distributing, you have to configure the source account for this distribut
 - Add account
   ```
   Usage:
-    bairdrop keys add <name> [flags]
+    tbairdrop keys add <name> [flags]
   ```
-  example(we use tbairdrop in this demo)
+  example
   ```
   $ tbairdrop keys add fromAcc --recover 
   Enter a passphrase for your key:
@@ -65,11 +67,11 @@ Save it as CSV format
 ### Run
 Then we can start distributing with the essential command `run`.
 ```
-$ bairdrop run --help
+$ tbairdrop run --help
 Run airdrop
 
 Usage:
-  bairdrop run [flags]
+  tbairdrop run [flags]
 
 Flags:
       --chain-id string   Chain ID of tendermint node
