@@ -57,7 +57,7 @@ After initializing the account, we need to prepare the CSV file of transfer deta
 
 ![transfer_details.csv](/manual/transfer_example.png?raw=true "example")
 
-From left to right are `target address`,`amount`,`asset`. For `amount`, we take the last 8 bits as the decimal place. For instance,`addr1,100000000,BNB` means transfer addr1 1BNB.
+>**From left to right are `target address`,`amount`,`asset`. For `amount`, we take the last 8 digits as the decimal place. For instance,1st row means transfer tbnb1rtzy6szuyzcj4amfn6uarvne8a5epxrdc28nhr 0.1BNB.**
 
 Save it as CSV format
 
