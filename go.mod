@@ -14,6 +14,7 @@ require (
 	github.com/spf13/viper v1.4.0
 	github.com/stretchr/testify v1.4.0
 	github.com/tendermint/go-amino v0.15.0
+	github.com/tendermint/iavl v0.12.4
 	github.com/tendermint/tendermint v0.32.3
 	golang.org/x/tools v0.0.0-20190524140312-2c0ae7006135
 	google.golang.org/appengine v1.4.0 // indirect
