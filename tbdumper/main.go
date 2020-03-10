@@ -14,18 +14,18 @@ import (
 
 func main() {
 	rootCmd := &cobra.Command{
-		Use:   "bdumper",
-		Short: "Balance Dumper",
+		Use:   "tbdumper",
+		Short: "Testnet Balance Dumper",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return dumper.AccExport()
 		},
 		PersistentPreRunE: globalConfig,
 	}
 
-	rootCmd.PersistentFlags().String("home", os.ExpandEnv("$HOME/.bdumper"), "directory for config and data")
+	rootCmd.PersistentFlags().String("home", os.ExpandEnv("$HOME/.tbdumper"), "directory for config and data")
 	rootCmd.PersistentFlags().Int64("height", 0, "query height ")
 	rootCmd.PersistentFlags().String("asset", "", "query asset ")
-	rootCmd.PersistentFlags().StringP("output", "o", os.ExpandEnv("$HOME/.bdumper"), "directory for storing the csv file of balance result")
+	rootCmd.PersistentFlags().StringP("output", "o", os.ExpandEnv("$HOME/.tbdumper"), "directory for storing the csv file of balance result")
 
 	executor := common.Executor{rootCmd, os.Exit}
 	err := executor.Execute()
