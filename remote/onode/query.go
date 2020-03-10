@@ -7,7 +7,7 @@ import (
 	tmtypes "github.com/tendermint/tendermint/rpc/core/types"
 )
 
-var rpcClient = rpc.NewRPCClient("tcp://dataseed1.binance.org:80", ctypes.ProdNetwork)
+var rpcClient = rpc.NewRPCClient("tcp://data-seed-pre-0-s3.binance.org:80", ctypes.TestNetwork)
 
 func GetTokenInfo(symbol string) (*types.Token, error) {
 	return rpcClient.GetTokenInfo(symbol)

@@ -1,9 +1,6 @@
 package node
 
-
-var GenesisJson =
-`
-{
+var GenesisJson = `{
   "genesis_time": "2019-03-07T01:52:07.500913003Z",
   "chain_id": "Binance-Chain-Nile",
   "consensus_params": {
@@ -810,5 +807,4 @@ var GenesisJson =
       }
     ]
   }
-}
-`
+}`

@@ -19,10 +19,10 @@ import (
 const DefaultDirPerm = 0700
 
 var (
-	defaultConfigDir     = "config"
- 	defaultDataDir       = "data"
- 	defaultConfigFileName  = "config.toml"
- 	defaultConfigFilePath   = filepath.Join(defaultConfigDir, defaultConfigFileName)
+	defaultConfigDir      = "config"
+	defaultDataDir        = "data"
+	defaultConfigFileName = "config.toml"
+	defaultConfigFilePath = filepath.Join(defaultConfigDir, defaultConfigFileName)
 )
 
 func prepare(ctx *config.BinanceChainContext) (err error) {
@@ -57,7 +57,7 @@ func prepare(ctx *config.BinanceChainContext) (err error) {
 }
 
 func interceptLoadConfigInPlace(ctx *config.BinanceChainContext) (err error) {
-	ctx.Config,err = parseConfig() //new config,read viper to config. create config file
+	ctx.Config, err = parseConfig() //new config,read viper to config. create config file
 	if err != nil {
 		return err
 	}
@@ -87,7 +87,7 @@ func parseConfig() (*tmcfg.Config, error) {
 	customizedConfigFile(conf)
 
 	conf.SetRoot(conf.RootDir)
-	ensureRoot(conf.RootDir,conf)
+	ensureRoot(conf.RootDir, conf)
 	if err = conf.ValidateBasic(); err != nil {
 		return nil, fmt.Errorf("Error in config file: %v", err)
 	}
@@ -109,11 +109,9 @@ func ensureRoot(rootDir string, conf *tmcfg.Config) {
 
 	configFilePath := filepath.Join(rootDir, defaultConfigFilePath)
 
-	tmcfg.WriteConfigFile(configFilePath,conf)
+	tmcfg.WriteConfigFile(configFilePath, conf)
 
 }
-
-
 
 func customizedAppFile(ctx *config.BinanceChainContext) {
 	ctx.BinanceChainConfig.BEP6Height = 24020000
@@ -127,6 +125,7 @@ func customizedAppFile(ctx *config.BinanceChainContext) {
 	ctx.BinanceChainConfig.ListingRuleUpgradeHeight = 49721000
 	ctx.BinanceChainConfig.FixZeroBalanceHeight = 49721000
 	ctx.BinanceChainConfig.LogToConsole = false
+	ctx.Bech32PrefixAccAddr = "tbnb"
 }
 
 func customizedConfigFile(conf *tmcfg.Config) {
@@ -135,9 +134,9 @@ func customizedConfigFile(conf *tmcfg.Config) {
 	conf.HotSyncReactor = true
 	conf.ProfListenAddress = ":9060"
 
-	conf.RPC.ListenAddress = "tcp://0.0.0.0:27147"
+	conf.RPC.ListenAddress = "tcp://0.0.0.0:26657"
 
-	conf.P2P.ListenAddress = "tcp://0.0.0.0:27146"
+	conf.P2P.ListenAddress = "tcp://0.0.0.0:26656"
 	conf.P2P.Seeds = "2726550182cbc5f4618c27e49c730752a96901e8@a41086771245011e988520ad55ba7f5a-5f7331395e69b0f3.elb.us-east-1.amazonaws.com:27146,34ac6eb6cd914014995b5929be8d7bc9c16f724d@aa13359cd244f11e988520ad55ba7f5a-c3963b80c9b991b7.elb.us-east-1.amazonaws.com:27146,fe5eb5a945598476abe4826a8d31b9f8da7b1a54@aa35ed7c1244f11e988520ad55ba7f5a-bbfb4fe79dee5d7e.elb.us-east-1.amazonaws.com:27146,8825b32e3abec71d772abf009ba1956d452be1fa@aa58a7e44244f11e988520ad55ba7f5a-45d504e63bacb8dd.elb.us-east-1.amazonaws.com:27146"
 	conf.P2P.AddrBookStrict = false
 	conf.P2P.MaxPacketMsgPayloadSize = 10485760
