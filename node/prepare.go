@@ -34,7 +34,7 @@ func prepare(ctx *config.BinanceChainContext) (err error) {
 	}
 
 	sdkConfig := sdk.GetConfig()
-	sdkConfig.SetBech32PrefixForAccount(ctx.Bech32PrefixAccAddr, ctx.Bech32PrefixAccPub)
+	sdkConfig.SetBech32PrefixForAccount("tbnb", ctx.Bech32PrefixAccPub)
 	sdkConfig.SetBech32PrefixForValidator(ctx.Bech32PrefixValAddr, ctx.Bech32PrefixValPub)
 	sdkConfig.SetBech32PrefixForConsensusNode(ctx.Bech32PrefixConsAddr, ctx.Bech32PrefixConsPub)
 	sdkConfig.Seal()
@@ -116,16 +116,16 @@ func ensureRoot(rootDir string, conf *tmcfg.Config) {
 
 
 func customizedAppFile(ctx *config.BinanceChainContext) {
-	ctx.BinanceChainConfig.BEP6Height = 20300000
-	ctx.BinanceChainConfig.BEP9Height = 20300000
-	ctx.BinanceChainConfig.BEP10Height = 20300000
-	ctx.BinanceChainConfig.BEP19Height = 20300000
-	ctx.BinanceChainConfig.BEP12Height = 25120000
-	ctx.BinanceChainConfig.BEP3Height = 41277000
-	ctx.BinanceChainConfig.FixSignBytesOverflowHeight = 51467800
-	ctx.BinanceChainConfig.LotSizeUpgradeHeight = 51467800
-	ctx.BinanceChainConfig.ListingRuleUpgradeHeight = 51467800
-	ctx.BinanceChainConfig.FixZeroBalanceHeight = 51467800
+	ctx.BinanceChainConfig.BEP6Height = 24020000
+	ctx.BinanceChainConfig.BEP9Height = 24020000
+	ctx.BinanceChainConfig.BEP10Height = 24020000
+	ctx.BinanceChainConfig.BEP19Height = 24020000
+	ctx.BinanceChainConfig.BEP12Height = 29794000
+	ctx.BinanceChainConfig.BEP3Height = 39581000
+	ctx.BinanceChainConfig.FixSignBytesOverflowHeight = 49721000
+	ctx.BinanceChainConfig.LotSizeUpgradeHeight = 49721000
+	ctx.BinanceChainConfig.ListingRuleUpgradeHeight = 49721000
+	ctx.BinanceChainConfig.FixZeroBalanceHeight = 49721000
 	ctx.BinanceChainConfig.LogToConsole = false
 }
 
@@ -138,7 +138,7 @@ func customizedConfigFile(conf *tmcfg.Config) {
 	conf.RPC.ListenAddress = "tcp://0.0.0.0:27147"
 
 	conf.P2P.ListenAddress = "tcp://0.0.0.0:27146"
-	conf.P2P.Seeds = "b323708b0bd429a95154ff0a287f0f42f432cb62@34.247.169.233:27146,bb721fe089e83d42bcb8f629f8efe0e4af888fde@52.197.88.253:27146,289f680c0c78465dbf1d86c2260dd032d4541a4c@34.227.165.88:27146"
+	conf.P2P.Seeds = "2726550182cbc5f4618c27e49c730752a96901e8@a41086771245011e988520ad55ba7f5a-5f7331395e69b0f3.elb.us-east-1.amazonaws.com:27146,34ac6eb6cd914014995b5929be8d7bc9c16f724d@aa13359cd244f11e988520ad55ba7f5a-c3963b80c9b991b7.elb.us-east-1.amazonaws.com:27146,fe5eb5a945598476abe4826a8d31b9f8da7b1a54@aa35ed7c1244f11e988520ad55ba7f5a-bbfb4fe79dee5d7e.elb.us-east-1.amazonaws.com:27146,8825b32e3abec71d772abf009ba1956d452be1fa@aa58a7e44244f11e988520ad55ba7f5a-45d504e63bacb8dd.elb.us-east-1.amazonaws.com:27146"
 	conf.P2P.AddrBookStrict = false
 	conf.P2P.MaxPacketMsgPayloadSize = 10485760
 	conf.P2P.KeysPerRequest = 1500

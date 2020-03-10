@@ -31,7 +31,7 @@ func init() {
 	ntypes.RegisterWire(codec)
 
 	config := sdk.GetConfig()
-	config.SetBech32PrefixForAccount("bnb", "bnbp")
+	config.SetBech32PrefixForAccount("tbnb", "bnbp")
 }
 
 func openDB(root, dbName string) *db.GoLevelDB {
@@ -113,7 +113,7 @@ func Fetch(height int64, asset string, homePath string) ([]Balance, error) {
 				if coin.Amount == 0 {
 					break
 				}
-				bech32Addr, _ := bech32.ConvertAndEncode("bnb", appAcc.Address)
+				bech32Addr, _ := bech32.ConvertAndEncode("tbnb", appAcc.Address)
 				matchedAccounts = append(matchedAccounts, Balance{bech32Addr, asset, coin.Amount})
 				break
 			}
