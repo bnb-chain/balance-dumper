@@ -44,17 +44,7 @@ $ curl localhost:27147/status
   "jsonrpc": "2.0",
   "id": "",
   "result": {
-    "node_info": {
-      "protocol_version": {
-        "p2p": "7",
-        "block": "10",
-        "app": "0"
-      },
-      "id": "086d8e31b7c149a47c772cf747d39b1ef6c23576",
-      "listen_addr": "tcp://0.0.0.0:27146",
-      "network": "Binance-Chain-Tigris",
-      ......
-    },
+    ......
     "sync_info": {
       ......
       "latest_block_height": "56503807", // the latest block height downloaded from peers
@@ -62,9 +52,7 @@ $ curl localhost:27147/status
       "catching_up": true,
       "index_height": "0"
     },
-    "validator_info": {
-      ......
-    }
+    ......
   }
 }
 ```
