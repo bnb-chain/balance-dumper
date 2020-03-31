@@ -6,7 +6,7 @@ require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/bgentry/speakeasy v0.1.0
 	github.com/binance-chain/go-sdk v1.2.2
-	github.com/binance-chain/node v0.6.3
+	github.com/binance-chain/node v0.6.3-hf.1
 	github.com/cosmos/cosmos-sdk v0.25.0
 	github.com/mattn/go-isatty v0.0.10
 	github.com/pkg/errors v0.8.1
