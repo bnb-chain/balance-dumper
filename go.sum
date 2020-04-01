@@ -26,6 +26,8 @@ github.com/bgentry/speakeasy v0.1.0 h1:ByYyxL9InA1OWqxJqqp2A5pYHUrCiAL6K3J+LKSsQ
 github.com/bgentry/speakeasy v0.1.0/go.mod h1:+zsyZBPWlz7T6j88CTgSN5bM796AkVf0kBD4zp0CCIs=
 github.com/binance-chain/bnc-cosmos-sdk v0.25.0-binance.20 h1:KwluEf2oheva5zdqeO/c/trvVFtrlYMyPXrCoTAAsTc=
 github.com/binance-chain/bnc-cosmos-sdk v0.25.0-binance.20/go.mod h1:Qd+w7Vm2WGxOqPquawShZ8KsHtA8PVDnx6XvZobloYg=
+github.com/binance-chain/bnc-cosmos-sdk v0.25.0-binance.21 h1:I/AMgDlXPWeZsCaCh0fqgvwkOI0YTpQEsRhC5+VECCU=
+github.com/binance-chain/bnc-cosmos-sdk v0.25.0-binance.21/go.mod h1:Qd+w7Vm2WGxOqPquawShZ8KsHtA8PVDnx6XvZobloYg=
 github.com/binance-chain/bnc-go-amino v0.14.1-binance.2 h1:XcbcfisVItk92UKoGbtNT8nbcfadj3H3ayuM2srAfVs=
 github.com/binance-chain/bnc-go-amino v0.14.1-binance.2/go.mod h1:yaElUUxWtv/TC/ldGtlKAvS1vKwokxgJ1d97I+6is80=
 github.com/binance-chain/bnc-tendermint v0.32.3-binance.1 h1:LDGvORYLSwsTEQM0W7yrbdgjrAZxQDe18WUTLNuFOEc=
@@ -38,6 +40,8 @@ github.com/binance-chain/ledger-cosmos-go v0.9.9-binance.1 h1:8mAtw1Tp/BhhTrsXmX
 github.com/binance-chain/ledger-cosmos-go v0.9.9-binance.1/go.mod h1:FI6WAujuiBpoSavYreux2zTKyrUkngXDlRJczxsDK5M=
 github.com/binance-chain/ledger-cosmos-go v0.9.9-binance.3 h1:FFpFbkzlP2HUyxQCm0eoU6mkfgMNynfqZRbeWqlaLdQ=
 github.com/binance-chain/ledger-cosmos-go v0.9.9-binance.3/go.mod h1:TULULYTvPuWBxFIZFy6KjJaxJzbHeUderYNB1YhD6N0=
+github.com/binance-chain/node v0.6.3-hf.1 h1:iLZAag6ELlxeiY/KgXXWnGj8HwqyWgjNh4WTiDnjteY=
+github.com/binance-chain/node v0.6.3-hf.1/go.mod h1:1ZEtKXhluiJxFhC7x79TEdw84ZLkiV0G60IlYFOhQ3E=
 github.com/binance-chain/node v0.6.3 h1:YXgRlkFejhxE0NFOvgxcpKqb5X0nzo8z8Z7l+cvRCgI=
 github.com/binance-chain/node v0.6.3/go.mod h1:fGNcehwb6j0efrrOEocbEwO40XTJ+6GrjFDtjszgyZo=
 github.com/binance-chain/tss v0.1.2 h1:AyTedSG5HG/WAvM9PDPWjTXQ+dvNdHg3x1c+1a584PQ=
