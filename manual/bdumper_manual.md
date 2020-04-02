@@ -69,7 +69,7 @@ It stops the synchronization， and starts to fetch accounts at this height.
 ```
 Finally, those account balances will be ouput to a CSV file, named by asset and height, as *BNB_56503900.csv*. The following is the example of a result file
 
-![BNB_56503900.csv](/manual/result_shot.png?raw=true "BNB_56503900.csv")
+![BNB_78475968.csv](/manual/result_shot.png?raw=true "BNB_78475968.csv")
 
 >**Note that for the balance, we take the last 8 digits as the decimal place, meaning the balance of *bnb1edrs5cukhx060e02u98v9j8spum7vhuqg9ctxd* in the above example is actually *32888888BNB*.**
 
