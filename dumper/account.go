@@ -120,7 +120,7 @@ func LatestBreatheBlockHeight(target int64) (int64, error) {
 	}
 
 	startOfDay := utils.StartOfUTCTime(utils.Milli2Time(block.TimeStamp))
-	block, isGreater := loopQuery(block, &startOfDay)
+	block, isGreater := loopQuery(block, &startOfDay, 0)
 
 	var curHeight int64
 	lastBlock := block
@@ -167,7 +167,7 @@ func queryBlock(height int64) (*explorer.Block, error) {
 	return explorer.QueryBlock(height)
 }
 
-func loopQuery(block *explorer.Block, startOfDay *time.Time) (*explorer.Block, bool) {
+func loopQuery(block *explorer.Block, startOfDay *time.Time, lastEstimatedGapHeight int64) (*explorer.Block, bool) {
 
 	gapMillisecond := float64(block.TimeStamp - utils.Time2Milli(startOfDay))
 	if math.Abs(gapMillisecond) <= 1000 {
@@ -175,12 +175,15 @@ func loopQuery(block *explorer.Block, startOfDay *time.Time) (*explorer.Block, b
 	}
 
 	estimatedGapHeight := int64(float32(gapMillisecond) * 0.0025)
+	if estimatedGapHeight+lastEstimatedGapHeight == 0 {
+		estimatedGapHeight = int64(float32(gapMillisecond) * 0.001)
+	}
 	block, err := queryBlock(block.BlockHeight - estimatedGapHeight)
 	if err != nil {
 		panic(err)
 	}
 
-	return loopQuery(block, startOfDay)
+	return loopQuery(block, startOfDay, estimatedGapHeight)
 
 }
 
@@ -200,10 +203,12 @@ func breatheBlockHeightFromExplorer(block *explorer.Block) (int64, bool) {
 
 func export(accs []account.Balance, output string) {
 	data := make([][]string, len(accs))
-	if accs != nil && len(accs) > 0 {
-		header := []string{"address", "balance", "asset"}
+	if len(accs) > 0 {
+		header := []string{"address", "available", "freeze", "in order", "total", "asset"}
 		for index, acc := range accs {
-			row := []string{acc.Address, strconv.FormatInt(acc.Quantity, 10), acc.Asset}
+			row := []string{acc.Address, strconv.FormatInt(acc.Available, 10),
+				strconv.FormatInt(acc.Freeze, 10), strconv.FormatInt(acc.InOrder, 10),
+				strconv.FormatInt(acc.Total, 10), acc.Asset}
 			data[index] = row
 		}
 		err := utils.CsvExport(header, data, output, viper.GetString("asset")+"_"+viper.GetString("height")+".csv")
