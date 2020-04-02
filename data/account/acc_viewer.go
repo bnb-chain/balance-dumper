@@ -68,9 +68,12 @@ func accountValueDecoder(value []byte) interface{} {
 }
 
 type Balance struct {
-	Address  string
-	Asset    string
-	Quantity int64
+	Address   string
+	Asset     string
+	Available int64
+	Freeze    int64
+	InOrder   int64
+	Total     int64
 }
 
 func getLatestVersion(db dbm.DB) int64 {
@@ -108,21 +111,43 @@ func Fetch(height int64, asset string, homePath string) ([]Balance, error) {
 	var matchedAccounts []Balance
 	tree.Iterate(func(key []byte, value []byte) bool {
 		appAcc := accountValueDecoder(value).(ntypes.AppAccount)
+		var available int64
+		var freeze int64
+		var inOrder int64
+		var total int64
+
 		for _, coin := range appAcc.BaseAccount.Coins {
 			if strings.Compare(coin.Denom, asset) == 0 {
-				if coin.Amount == 0 {
-					break
-				}
-				bech32Addr, _ := bech32.ConvertAndEncode("tbnb", appAcc.Address)
-				matchedAccounts = append(matchedAccounts, Balance{bech32Addr, asset, coin.Amount})
+				available = coin.Amount
 				break
 			}
 		}
+
+		for _, coin := range appAcc.GetFrozenCoins() {
+			if strings.Compare(coin.Denom, asset) == 0 {
+				freeze = coin.Amount
+				break
+			}
+		}
+
+		for _, coin := range appAcc.GetLockedCoins() {
+			if strings.Compare(coin.Denom, asset) == 0 {
+				inOrder = coin.Amount
+				break
+			}
+		}
+
+		total = available + freeze + inOrder
+		if total > 0 {
+			bech32Addr, _ := bech32.ConvertAndEncode("tbnb", appAcc.Address)
+			matchedAccounts = append(matchedAccounts, Balance{bech32Addr, asset, available, freeze, inOrder, total})
+		}
+
 		return false
 	})
 
 	sort.Slice(matchedAccounts, func(i, j int) bool {
-		return matchedAccounts[j].Quantity < matchedAccounts[i].Quantity
+		return matchedAccounts[j].Total < matchedAccounts[i].Total
 	})
 
 	return matchedAccounts, nil

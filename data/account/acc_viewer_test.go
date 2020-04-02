@@ -8,7 +8,7 @@ import (
 )
 
 func TestGetLatestHeight(t *testing.T) {
-	homePath := os.ExpandEnv("$HOME/.bdumper")
+	homePath := os.ExpandEnv("$HOME/.tbdumper")
 	height := GetLatestBlockHeight(homePath)
 	fmt.Printf("latest height is %d", height)
 }
@@ -16,7 +16,7 @@ func TestGetLatestHeight(t *testing.T) {
 func TestFetch(t *testing.T) {
 	height := int64(68515735)
 	asset := "bnb"
-	homePath := os.ExpandEnv("$HOME/.bdumper")
+	homePath := os.ExpandEnv("$HOME/.tbdumper")
 	accounts, err := Fetch(height, asset, homePath)
 	if err != nil {
 		t.Error(err)
@@ -25,7 +25,7 @@ func TestFetch(t *testing.T) {
 }
 
 func TestGetAccount(t *testing.T) {
-	homePath := os.ExpandEnv("$HOME/.bdumper")
+	homePath := os.ExpandEnv("$HOME/.tbdumper")
 	acc, err := GetAccount(58571291, homePath, "bnb1ag3rpe9lten7fhyqg4cde9qusrv3dv67lsshup")
 	if err != nil {
 		t.Error(err)
