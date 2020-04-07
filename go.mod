@@ -6,7 +6,7 @@ require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/bgentry/speakeasy v0.1.0
 	github.com/binance-chain/go-sdk v1.2.2
-	github.com/binance-chain/node v0.6.3
+	github.com/binance-chain/node v0.6.3-hf.1
 	github.com/cosmos/cosmos-sdk v0.25.0
 	github.com/mattn/go-isatty v0.0.10
 	github.com/pkg/errors v0.8.1
@@ -21,7 +21,7 @@ require (
 )
 
 replace (
-	github.com/cosmos/cosmos-sdk => github.com/binance-chain/bnc-cosmos-sdk v0.25.0-binance.20
+	github.com/cosmos/cosmos-sdk => github.com/binance-chain/bnc-cosmos-sdk v0.25.0-binance.21
 	github.com/tendermint/go-amino => github.com/binance-chain/bnc-go-amino v0.14.1-binance.2
 	github.com/tendermint/iavl => github.com/binance-chain/bnc-tendermint-iavl v0.12.0-binance.3
 	github.com/tendermint/tendermint => github.com/binance-chain/bnc-tendermint v0.32.3-binance.1
