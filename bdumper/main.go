@@ -25,6 +25,7 @@ func main() {
 	rootCmd.PersistentFlags().String("home", os.ExpandEnv("$HOME/.bdumper"), "directory for config and data")
 	rootCmd.PersistentFlags().Int64("height", 0, "query height ")
 	rootCmd.PersistentFlags().String("asset", "", "query asset ")
+	rootCmd.PersistentFlags().String("dataseed", "", "dataseed used to connecting to ")
 	rootCmd.PersistentFlags().StringP("output", "o", os.ExpandEnv("$HOME/.bdumper"), "directory for storing the csv file of balance result")
 
 	executor := common.Executor{rootCmd, os.Exit}

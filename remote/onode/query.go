@@ -9,10 +9,16 @@ import (
 
 var rpcClient = rpc.NewRPCClient("tcp://dataseed1.binance.org:80", ctypes.ProdNetwork)
 
-func GetTokenInfo(symbol string) (*types.Token, error) {
+func GetTokenInfo(symbol string, dataseed string) (*types.Token, error) {
+	if len(dataseed) > 0 {
+		rpcClient = rpc.NewRPCClient("tcp://"+dataseed, ctypes.ProdNetwork)
+	}
 	return rpcClient.GetTokenInfo(symbol)
 }
 
-func GetBlock(height *int64) (*tmtypes.ResultBlock, error) {
+func GetBlock(height *int64, dataseed string) (*tmtypes.ResultBlock, error) {
+	if len(dataseed) > 0 {
+		rpcClient = rpc.NewRPCClient("tcp://"+dataseed, ctypes.ProdNetwork)
+	}
 	return rpcClient.Block(height)
 }
