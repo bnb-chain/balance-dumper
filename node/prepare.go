@@ -19,10 +19,10 @@ import (
 const DefaultDirPerm = 0700
 
 var (
-	defaultConfigDir     = "config"
- 	defaultDataDir       = "data"
- 	defaultConfigFileName  = "config.toml"
- 	defaultConfigFilePath   = filepath.Join(defaultConfigDir, defaultConfigFileName)
+	defaultConfigDir      = "config"
+	defaultDataDir        = "data"
+	defaultConfigFileName = "config.toml"
+	defaultConfigFilePath = filepath.Join(defaultConfigDir, defaultConfigFileName)
 )
 
 func prepare(ctx *config.BinanceChainContext) (err error) {
@@ -57,7 +57,7 @@ func prepare(ctx *config.BinanceChainContext) (err error) {
 }
 
 func interceptLoadConfigInPlace(ctx *config.BinanceChainContext) (err error) {
-	ctx.Config,err = parseConfig() //new config,read viper to config. create config file
+	ctx.Config, err = parseConfig() //new config,read viper to config. create config file
 	if err != nil {
 		return err
 	}
@@ -87,7 +87,7 @@ func parseConfig() (*tmcfg.Config, error) {
 	customizedConfigFile(conf)
 
 	conf.SetRoot(conf.RootDir)
-	ensureRoot(conf.RootDir,conf)
+	ensureRoot(conf.RootDir, conf)
 	if err = conf.ValidateBasic(); err != nil {
 		return nil, fmt.Errorf("Error in config file: %v", err)
 	}
@@ -109,11 +109,9 @@ func ensureRoot(rootDir string, conf *tmcfg.Config) {
 
 	configFilePath := filepath.Join(rootDir, defaultConfigFilePath)
 
-	tmcfg.WriteConfigFile(configFilePath,conf)
+	tmcfg.WriteConfigFile(configFilePath, conf)
 
 }
-
-
 
 func customizedAppFile(ctx *config.BinanceChainContext) {
 	ctx.BinanceChainConfig.BEP6Height = 20300000
@@ -122,11 +120,15 @@ func customizedAppFile(ctx *config.BinanceChainContext) {
 	ctx.BinanceChainConfig.BEP19Height = 20300000
 	ctx.BinanceChainConfig.BEP12Height = 25120000
 	ctx.BinanceChainConfig.BEP3Height = 41277000
+	ctx.BinanceChainConfig.BEP8Height = 99550000
+	ctx.BinanceChainConfig.BEP67Height = 99550000
+	ctx.BinanceChainConfig.BEP70Height = 99550000
 	ctx.BinanceChainConfig.FixSignBytesOverflowHeight = 51467800
 	ctx.BinanceChainConfig.LotSizeUpgradeHeight = 51467800
 	ctx.BinanceChainConfig.ListingRuleUpgradeHeight = 51467800
 	ctx.BinanceChainConfig.FixZeroBalanceHeight = 51467800
 	ctx.BinanceChainConfig.LogToConsole = false
+	ctx.BUSDSymbol = "BUSD-BD1"
 }
 
 func customizedConfigFile(conf *tmcfg.Config) {

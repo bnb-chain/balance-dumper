@@ -26,6 +26,7 @@ func AccExport() (err error) {
 	home := viper.GetString("home")
 	asset := viper.GetString("asset")
 	output := viper.GetString("output")
+	dataseed := viper.GetString("dataseed")
 	if len(output) == 0 {
 		output = home
 	}
@@ -38,7 +39,7 @@ func AccExport() (err error) {
 		return fmt.Errorf("asset can not be empty")
 	}
 
-	_, err = onode.GetTokenInfo(asset)
+	_, err = onode.GetTokenInfo(asset, dataseed)
 	if err != nil {
 		return err
 	}
