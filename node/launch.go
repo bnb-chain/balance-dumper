@@ -2,21 +2,27 @@ package node
 
 import (
 	"fmt"
+	"io"
+	"log"
+	"time"
+
 	"github.com/binance-chain/node/app"
 	"github.com/binance-chain/node/common/tx"
 	"github.com/binance-chain/node/common/types"
 	"github.com/binance-chain/node/common/upgrade"
 	"github.com/binance-chain/node/plugins/account"
 	"github.com/binance-chain/node/plugins/dex"
-	"github.com/binance-chain/node/plugins/param"
 	"github.com/binance-chain/node/plugins/tokens"
 	"github.com/binance-chain/node/wire"
+
 	"github.com/cosmos/cosmos-sdk/server"
 	"github.com/cosmos/cosmos-sdk/server/concurrent"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	"github.com/cosmos/cosmos-sdk/x/gov"
+	param "github.com/cosmos/cosmos-sdk/x/paramHub"
 	"github.com/cosmos/cosmos-sdk/x/stake"
+
 	abci "github.com/tendermint/tendermint/abci/types"
 	dbm "github.com/tendermint/tendermint/libs/db"
 	tlog "github.com/tendermint/tendermint/libs/log"
@@ -24,9 +30,6 @@ import (
 	"github.com/tendermint/tendermint/p2p"
 	pvm "github.com/tendermint/tendermint/privval"
 	tmTypes "github.com/tendermint/tendermint/types"
-	"io"
-	"log"
-	"time"
 )
 
 var Codec = MakeCodec()
