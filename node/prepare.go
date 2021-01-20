@@ -114,18 +114,32 @@ func ensureRoot(rootDir string, conf *tmcfg.Config) {
 }
 
 func customizedAppFile(ctx *config.BinanceChainContext) {
-	ctx.BinanceChainConfig.BEP6Height = 24020000
-	ctx.BinanceChainConfig.BEP9Height = 24020000
-	ctx.BinanceChainConfig.BEP10Height = 24020000
-	ctx.BinanceChainConfig.BEP19Height = 24020000
-	ctx.BinanceChainConfig.BEP12Height = 29794000
-	ctx.BinanceChainConfig.BEP3Height = 39581000
-	ctx.BinanceChainConfig.FixSignBytesOverflowHeight = 49721000
-	ctx.BinanceChainConfig.LotSizeUpgradeHeight = 49721000
-	ctx.BinanceChainConfig.ListingRuleUpgradeHeight = 49721000
-	ctx.BinanceChainConfig.FixZeroBalanceHeight = 49721000
+	ctx.BinanceChainConfig.BEP6Height = 1
+	ctx.BinanceChainConfig.BEP9Height = 1
+	ctx.BinanceChainConfig.BEP10Height = 1
+	ctx.BinanceChainConfig.BEP19Height = 1
+	ctx.BinanceChainConfig.BEP12Height = 1
+	ctx.BinanceChainConfig.BEP3Height = 1
+	ctx.BinanceChainConfig.FixSignBytesOverflowHeight = 1
+	ctx.BinanceChainConfig.LotSizeUpgradeHeight = 1
+	ctx.BinanceChainConfig.ListingRuleUpgradeHeight = 1
+	ctx.BinanceChainConfig.FixZeroBalanceHeight = 1
+	ctx.BinanceChainConfig.BEP70Height = 1
+	ctx.BinanceChainConfig.BEP67Height = 1
+	ctx.BinanceChainConfig.BEP8Height = 1
+	ctx.BinanceChainConfig.LaunchBscUpgradeHeight = 1
+	ctx.BinanceChainConfig.BEP82Height = 7841000
+	ctx.BinanceChainConfig.BEP84Height = 7841000
+	ctx.BinanceChainConfig.BEP87Height = 7841000
+	ctx.BinanceChainConfig.FixFailAckPackageHeight = 7841000
+	ctx.BinanceChainConfig.EnableAccountScriptsForCrossChainTransferHeight = 7841000
+
 	ctx.BinanceChainConfig.LogToConsole = false
 	ctx.Bech32PrefixAccAddr = "tbnb"
+	ctx.BUSDSymbol = "BUSD-BAF"
+	ctx.IbcChainId = 1
+	ctx.BscChainId = "chapel"
+	ctx.BscIbcChainId = 97
 }
 
 func customizedConfigFile(conf *tmcfg.Config) {
