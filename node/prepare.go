@@ -128,6 +128,11 @@ func customizedAppFile(ctx *config.BinanceChainContext) {
 	ctx.BinanceChainConfig.ListingRuleUpgradeHeight = 51467800
 	ctx.BinanceChainConfig.FixZeroBalanceHeight = 51467800
 	ctx.BinanceChainConfig.LaunchBscUpgradeHeight = 109999000
+	ctx.BinanceChainConfig.BEP82Height = 146060000
+	ctx.BinanceChainConfig.BEP84Height = 146060000
+	ctx.BinanceChainConfig.BEP87Height = 146060000
+	ctx.BinanceChainConfig.FixFailAckPackageHeight = 146060000
+	ctx.BinanceChainConfig.EnableAccountScriptsForCrossChainTransferHeight = 146060000
 	ctx.BinanceChainConfig.LogToConsole = false
 	ctx.BUSDSymbol = "BUSD-BD1"
 	ctx.IbcChainId = 1
