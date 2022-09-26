@@ -3,8 +3,8 @@ package account
 import (
 	"bytes"
 	"fmt"
-	"github.com/binance-chain/node/common"
-	ntypes "github.com/binance-chain/node/common/types"
+	"github.com/bnb-chain/node/common"
+	ntypes "github.com/bnb-chain/node/common/types"
 	"github.com/cosmos/cosmos-sdk/store"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
@@ -138,7 +138,7 @@ func Fetch(height int64, asset string, homePath string) ([]Balance, error) {
 		}
 
 		total = available + freeze + inOrder
-		if total > 0 {
+		if total >= 1e7 {
 			bech32Addr, _ := bech32.ConvertAndEncode("bnb", appAcc.Address)
 			matchedAccounts = append(matchedAccounts, Balance{bech32Addr, asset, available, freeze, inOrder, total})
 		}

@@ -3,7 +3,6 @@ package dumper
 import (
 	"fmt"
 	"github.com/binance-chain/balance-dumper/data/account"
-	"github.com/binance-chain/balance-dumper/node"
 	"github.com/binance-chain/balance-dumper/remote/explorer"
 	"github.com/binance-chain/balance-dumper/remote/onode"
 	"github.com/binance-chain/balance-dumper/utils"
@@ -12,7 +11,6 @@ import (
 	"math"
 	"os"
 	"strconv"
-	"strings"
 	"time"
 )
 
@@ -44,43 +42,8 @@ func AccExport() (err error) {
 		return err
 	}
 
-	latestHeight := account.GetLatestBlockHeight(home)
-	var breatheHeight int64
-
-	var accs []account.Balance
-	if targetHeight > latestHeight {
-		breatheHeight, err = LatestBreatheBlockHeight(targetHeight)
-		if err != nil {
-			return err
-		}
-		if breatheHeight-latestHeight > 15000 { // state sync mode
-			launchStateSync(breatheHeight, home)
-		} else { // fast sync
-			viper.Set("state_sync_height", -1)
-		}
-		err = node.Start(targetHeight)
-	} else {
-		accs, err = account.Fetch(targetHeight, asset, home)
-		if err == nil {
-			export(accs, output)
-			return nil
-		}
-
-		if err.Error() == NoData || strings.Contains(err.Error(), KnownErrPrefix) { // data does not exist in DB
-			breatheHeight, err = LatestBreatheBlockHeight(targetHeight)
-			if err != nil {
-				return err
-			}
-			launchStateSync(breatheHeight, home)
-			err = node.Start(targetHeight)
-		}
-	}
-
-	if err == nil {
-		accs, err = account.Fetch(targetHeight, asset, home)
-		export(accs, output)
-	}
-
+	accs, err := account.Fetch(targetHeight, asset, home)
+	export(accs, output)
 	return err
 
 }

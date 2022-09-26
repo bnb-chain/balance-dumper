@@ -15,7 +15,6 @@ func TestAccExport(t *testing.T) {
 	viper.Set("output", os.ExpandEnv("$HOME/.bdumper"))
 	err := AccExport()
 	assert.NoError(t, err)
-
 }
 
 func TestLatestBreatheHeight(t *testing.T) {

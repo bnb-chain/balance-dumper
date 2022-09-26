@@ -2,8 +2,8 @@ package node
 
 import (
 	"fmt"
-	"github.com/binance-chain/node/app/config"
-	bnclog "github.com/binance-chain/node/common/log"
+	"github.com/bnb-chain/node/app/config"
+	bnclog "github.com/bnb-chain/node/common/log"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/spf13/viper"
 	tmcfg "github.com/tendermint/tendermint/config"

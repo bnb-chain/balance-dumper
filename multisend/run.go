@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/binance-chain/balance-dumper/common"
 	"github.com/binance-chain/balance-dumper/utils"
-	"github.com/binance-chain/node/app"
+	"github.com/bnb-chain/node/app"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/context"
 	"github.com/cosmos/cosmos-sdk/client/keys"
