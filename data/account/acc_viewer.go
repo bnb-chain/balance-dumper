@@ -139,8 +139,10 @@ func Fetch(height int64, asset string, homePath string) ([]Balance, error) {
 		}
 
 		total = available + freeze + inOrder
-		bech32Addr, _ := bech32.ConvertAndEncode("bnb", appAcc.Address)
-		matchedAccounts = append(matchedAccounts, Balance{bech32Addr, asset, available, freeze, inOrder, total})
+		if total > 0 {
+			bech32Addr, _ := bech32.ConvertAndEncode("bnb", appAcc.Address)
+			matchedAccounts = append(matchedAccounts, Balance{bech32Addr, asset, available, freeze, inOrder, total})
+		}
 
 		return false
 	})
