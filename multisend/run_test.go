@@ -2,15 +2,16 @@ package multisend
 
 import (
 	"fmt"
+	"os"
+	"testing"
+
 	"github.com/binance-chain/balance-dumper/common"
 	"github.com/binance-chain/balance-dumper/utils"
-	"github.com/binance-chain/node/app"
+	"github.com/bnb-chain/node/app"
 	"github.com/cosmos/cosmos-sdk/client"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
-	"os"
-	"testing"
 )
 
 func TestRun(t *testing.T) {

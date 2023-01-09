@@ -2,8 +2,12 @@ package node
 
 import (
 	"fmt"
-	"github.com/binance-chain/node/app/config"
-	bnclog "github.com/binance-chain/node/common/log"
+	"os"
+	"path"
+	"path/filepath"
+
+	"github.com/bnb-chain/node/app/config"
+	bnclog "github.com/bnb-chain/node/common/log"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/spf13/viper"
 	tmcfg "github.com/tendermint/tendermint/config"
@@ -11,9 +15,6 @@ import (
 	tmflags "github.com/tendermint/tendermint/libs/cli/flags"
 	cmn "github.com/tendermint/tendermint/libs/common"
 	"github.com/tendermint/tendermint/libs/log"
-	"os"
-	"path"
-	"path/filepath"
 )
 
 const DefaultDirPerm = 0700

@@ -3,8 +3,13 @@ package account
 import (
 	"bytes"
 	"fmt"
-	"github.com/binance-chain/node/common"
-	ntypes "github.com/binance-chain/node/common/types"
+	"log"
+	"path"
+	"sort"
+	"strings"
+
+	"github.com/bnb-chain/node/common"
+	ntypes "github.com/bnb-chain/node/common/types"
 	"github.com/cosmos/cosmos-sdk/store"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
@@ -14,10 +19,6 @@ import (
 	"github.com/tendermint/tendermint/libs/bech32"
 	"github.com/tendermint/tendermint/libs/db"
 	dbm "github.com/tendermint/tendermint/libs/db"
-	"log"
-	"path"
-	"sort"
-	"strings"
 )
 
 const (

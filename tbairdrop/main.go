@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/binance-chain/balance-dumper/common"
 	"github.com/binance-chain/balance-dumper/multisend"
-	"github.com/binance-chain/node/app"
+	"github.com/bnb-chain/node/app"
 	"github.com/cosmos/cosmos-sdk/client/keys"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"os"
 )
 
 var (

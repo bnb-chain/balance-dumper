@@ -2,9 +2,11 @@ package multisend
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/binance-chain/balance-dumper/common"
 	"github.com/binance-chain/balance-dumper/utils"
-	"github.com/binance-chain/node/app"
+	"github.com/bnb-chain/node/app"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/context"
 	"github.com/cosmos/cosmos-sdk/client/keys"
@@ -18,7 +20,6 @@ import (
 	"github.com/tendermint/tendermint/crypto/tmhash"
 	cmn "github.com/tendermint/tendermint/libs/common"
 	ctypes "github.com/tendermint/tendermint/rpc/core/types"
-	"time"
 )
 
 type Transfer struct {
