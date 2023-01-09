@@ -3,6 +3,11 @@ package account
 import (
 	"bytes"
 	"fmt"
+	"log"
+	"path"
+	"sort"
+	"strings"
+
 	"github.com/bnb-chain/node/common"
 	ntypes "github.com/bnb-chain/node/common/types"
 	"github.com/cosmos/cosmos-sdk/store"
@@ -14,10 +19,6 @@ import (
 	"github.com/tendermint/tendermint/libs/bech32"
 	"github.com/tendermint/tendermint/libs/db"
 	dbm "github.com/tendermint/tendermint/libs/db"
-	"log"
-	"path"
-	"sort"
-	"strings"
 )
 
 const (
@@ -138,10 +139,8 @@ func Fetch(height int64, asset string, homePath string) ([]Balance, error) {
 		}
 
 		total = available + freeze + inOrder
-		if total >= 1e7 {
-			bech32Addr, _ := bech32.ConvertAndEncode("bnb", appAcc.Address)
-			matchedAccounts = append(matchedAccounts, Balance{bech32Addr, asset, available, freeze, inOrder, total})
-		}
+		bech32Addr, _ := bech32.ConvertAndEncode("bnb", appAcc.Address)
+		matchedAccounts = append(matchedAccounts, Balance{bech32Addr, asset, available, freeze, inOrder, total})
 
 		return false
 	})
